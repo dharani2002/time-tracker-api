@@ -18,6 +18,8 @@
   "author": "dharani",
   "license": "ISC",
   "devDependencies": {
+    "@types/cookie-parser": "^1.4.8",
+    "@types/cors": "^2.8.17",
     "@types/dotenv": "^6.1.1",
     "@types/express": "^5.0.0",
     "@types/node": "^22.10.3",
@@ -25,5 +27,13 @@
     "prettier": "3.4.2",
     "ts-node": "^10.9.2",
     "typescript": "^5.7.2"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "kysely": "^0.27.5",
+    "mysql2": "^3.12.0"
   }
 }
