@@ -1,6 +1,6 @@
-interface ApiErrorParams {
+export interface ApiErrorParams {
     statusCode: number;
-    message?: string;
+    message: string;
     errors?: Array<string | Error>;
     stack?: string;
 }
@@ -32,4 +32,4 @@ class ApiError extends Error {
     }
 }
 
-export default ApiError;
+export {ApiError};

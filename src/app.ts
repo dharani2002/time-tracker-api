@@ -17,4 +17,10 @@ app.use(express.static("public"))
 
 app.use(cookieParser())
 
+//import routes
+import projectRouter from "./routes/project.routes.js";
+
+//routes decalaration
+app.use("/api/v1/projects",projectRouter)
+
 export {app}
