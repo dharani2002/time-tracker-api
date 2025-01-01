@@ -1,1 +1,1 @@
-export const DB_NAME="timetracker";
+export const DB_NAME = "timetracker";
