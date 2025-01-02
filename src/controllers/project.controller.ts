@@ -59,40 +59,60 @@ const getProjectDetails = asyncHandler(async (req: Request, res: Response) => {
     )
 });
 
-// const updateProjectDetails = asyncHandler(async (req: Request, res: Response) => {
-//     const { id } = req.params as { id: string };
-//     const { name, description }: ProjectNameAndDescription = req.body;
+const updateProjectDetails = asyncHandler(async (req: Request, res: Response) => {
+    const { id } = req.params as { id: string };
+    const { name, description }: ProjectNameAndDescription = req.body;
 
-//     if (!name?.trim()) {
-//         throw new ApiError({ statusCode: 400, message: "Project name is required" });
-//     }
+    if (!name?.trim()) {
+        throw new ApiError({ statusCode: 400, message: "Project name is required" });
+    }
 
-//     const result = await db.updateTable('project')
-//         .set({
-//             name,
-//             description,
-//             //updated_at: new Date(),
-//         })
-//         .where('id', '=', parseInt(id, 10))
-//         .execute();
+    const result = await db.updateTable('project')
+        .set({
+            name,
+            description,
+            //updated_at: new Date(),
+        })
+        .where('id', '=', parseInt(id, 10))
+        .executeTakeFirst();
 
-//     if (result.numUpdatedRows === 0n) {
-//         throw new ApiError({ statusCode: 404, message: "Project not found" });
-//     }
+    if (Number(result.numUpdatedRows )=== 0) {
+        throw new ApiError({ statusCode: 404, message: "Project not found" });
+    }
 
-//     const updatedProject = await db.selectFrom('project')
-//         .selectAll()
-//         .where('id', '=', parseInt(id, 10))
-//         .executeTakeFirst();
+    const updatedProject = await db.selectFrom('project')
+        .selectAll()
+        .where('id', '=', parseInt(id, 10))
+        .executeTakeFirst();
 
-//     return res.status(200).json({
-//         success: true,
-//         message: 'Project updated successfully',
-//         data: updatedProject
-//     });
-// });
+    return res.status(200).json({
+        success: true,
+        message: 'Project updated successfully',
+        data: updatedProject
+    });
+});
+
+const deleteProjectDetails = asyncHandler(async (req: Request, res: Response) => {
+    
+        const { id } = req.params;
+
+        const deletedCount = await db.deleteFrom('project')
+            .where('id', '=', parseInt(id, 10))
+            .executeTakeFirst();
+
+       console.log({dd:deletedCount.numDeletedRows}) 
+
+    if (Number(deletedCount.numDeletedRows) === 0) {
+            return res.status(404).json({ message: 'Project not found' });
+        }
+
+        res.status(200).json({ message: 'Project deleted successfully' });
+    
+})
 
 export { 
     createProjects,
-    getProjectDetails
+    getProjectDetails,
+    updateProjectDetails,
+    deleteProjectDetails
 };
