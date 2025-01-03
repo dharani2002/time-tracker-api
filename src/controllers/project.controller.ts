@@ -100,7 +100,7 @@ const deleteProjectDetails = asyncHandler(async (req: Request, res: Response) =>
             .where('id', '=', parseInt(id, 10))
             .executeTakeFirst();
 
-       console.log({dd:deletedCount.numDeletedRows}) 
+       //console.log({dd:deletedCount.numDeletedRows}) 
 
     if (Number(deletedCount.numDeletedRows) === 0) {
             return res.status(404).json({ message: 'Project not found' });

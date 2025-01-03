@@ -19,8 +19,10 @@ app.use(cookieParser())
 
 //import routes
 import projectRouter from "./routes/project.routes.js";
+import timelogRouter from "./routes/timelog.routes.js";
 
 //routes decalaration
 app.use("/api/v1/projects",projectRouter)
+app.use("/api/v1/timelogs",timelogRouter)
 
 export {app}
